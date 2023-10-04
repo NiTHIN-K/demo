@@ -22,20 +22,10 @@ import com.neovisionaries.i18n.CountryCode;
 @Service
 public class AddressParserService {
     public String parseToUPP(String address) {
-        RestTemplate restTemplate = new RestTemplate();
-        String baseUrl = "https://nominatim.openstreetmap.org";
-        String path = "/search";
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseUrl).path(path);
-        builder.queryParam("addressdetails", "1");
-        builder.queryParam("format", "json");
-        builder.queryParam("q", address);
-        String url = builder.build().toUriString();
-        String response = restTemplate.getForObject(url, String.class);
-        System.out.println("RESPONSE: "+response);
+        AddressApiService api = new AddressApiService();
+        String response = api.getAddressDetails(address);
+
         JsonParser springParser = JsonParserFactory.getJsonParser();
-        if (response == null || response.equals("[]")){     //  API returns empty response if input is unrecognized
-            return "Address format invalid";
-        }
         Map<String, Object> map = springParser.parseMap(response.substring(1,response.length() - 1));
         Map<String, String> addrMap = Splitter.onPattern(", ").withKeyValueSeparator("=").split(map.get("address").toString().substring(1, map.get("address").toString().length() - 1));
 
