@@ -21,22 +21,15 @@ import com.neovisionaries.i18n.CountryCode;
 
 @Service
 public class AddressParserService {
-    public String parseToUPP(String address) {
-        AddressApiService api = new AddressApiService();
-        String response = api.getAddressDetails(address);
-
+    public String parseToUPP(String response) {
+        if (response == null || response.isEmpty()){    //  Validate that the response is correct
+            return "Invalid Address Input String";
+        }
         JsonParser springParser = JsonParserFactory.getJsonParser();
         Map<String, Object> map = springParser.parseMap(response.substring(1,response.length() - 1));
         Map<String, String> addrMap = Splitter.onPattern(", ").withKeyValueSeparator("=").split(map.get("address").toString().substring(1, map.get("address").toString().length() - 1));
 
-        String[] mapArray = new String[addrMap.size()];
-        System.out.println("Items found: " + mapArray.length);
-        int i = 0;
-        for (Map.Entry < String, String > entry: addrMap.entrySet()) {
-            System.out.println(entry.getKey() + " = " + entry.getValue());
-            i++;
-        }
-        String houseNumber = addrMap.get("house_number");
+        String houseNumber = addrMap.get("house_number");   //  Map variables to corresponding values
         String zip = addrMap.get("postcode");
         String isoAlpha = addrMap.get("ISO3166-2-lvl4");
         CountryCode cc = CountryCode.getByCode(addrMap.get("country_code"), false);
@@ -50,7 +43,7 @@ public class AddressParserService {
 
         double lat = Double.parseDouble((String) map.get("lat"));
         double longitude = Double.parseDouble((String) map.get("lon"));
-        String latlong = GeoHash.encodeHash(lat, longitude, 10);
+        String latlong = GeoHash.encodeHash(lat, longitude, 10);    //  Use geohash to combine lat and long into one string
 
         PropertyType type = PropertyType.COMMERCIAL;
         if(addrMap.containsKey("residential")){
