@@ -76,5 +76,13 @@ public class AddressParserServiceTest {
 		assertEquals("Invalid Address Input String", upp);
 	}
 
+	@Test
+	public void testParseToUPP_bad_input(){
+		String inputAddress = "B@ad input";
+		String details = realApiService.getAddressDetails(inputAddress);
+		String upp = addressParserService.parseToUPP(details);
+		assertEquals("Invalid Address Input String", upp);
+	}
+
 }
 

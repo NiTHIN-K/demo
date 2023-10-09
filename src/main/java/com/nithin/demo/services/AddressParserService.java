@@ -2,7 +2,7 @@ package com.nithin.demo.services;
 
 import com.nithin.demo.CountyNumberStore;
 import com.nithin.demo.PropertyType;
-import org.apache.tomcat.util.json.JSONParser;
+//import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.boot.json.JsonParser;
 import org.springframework.boot.json.JsonParserFactory;
 import org.springframework.http.*;
@@ -22,7 +22,7 @@ import com.neovisionaries.i18n.CountryCode;
 @Service
 public class AddressParserService {
     public String parseToUPP(String response) {
-        if (response == null || response.isEmpty()){    //  Validate that the response is correct
+        if (response == null || response.isEmpty() || response.equals("[]")){    //  Validate that the response is correct
             return "Invalid Address Input String";
         }
         JsonParser springParser = JsonParserFactory.getJsonParser();

@@ -19,9 +19,9 @@ public class AddressApiService {
         String url = builder.build().toUriString();
         String response = restTemplate.getForObject(url, String.class);
         System.out.println("RESPONSE: "+response);
-        if (response == null || response.equals("[]")){     //  API returns empty response if input is unrecognized
-            return "Address format invalid";
-        }
+//        if (response == null || response.equals("[]")){     //  API returns empty response if input is unrecognized
+//            return "Address format invalid";
+//        }
         return response;
     }
 }
