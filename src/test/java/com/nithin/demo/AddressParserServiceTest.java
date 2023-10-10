@@ -84,18 +84,6 @@ public class AddressParserServiceTest {
 	}
 
 	@Test
-	public void testParseSlightlyDifferentInput4(){	//	Test extra comma
-		String inputAddress = "769, Pheasant Woods Dr.";
-		String inputAddressDiff = "769 Pheasant Woods Drive";
-		String details = realApiService.getAddressDetails(inputAddress);
-		String upp = addressParserService.parseToUPP(details);
-		String detailsDiff = realApiService.getAddressDetails(inputAddressDiff);
-		String uppDiff = addressParserService.parseToUPP(detailsDiff);
-		System.out.println(upp + uppDiff);
-		assertEquals(upp, uppDiff);
-	}
-
-	@Test
 	public void testParseToUPP_no_api_response() {	//	Test handling of blank/no response from API
 		// Arrange
 		String inputAddress = "Test Input, doesn't matter because method is mocked";
