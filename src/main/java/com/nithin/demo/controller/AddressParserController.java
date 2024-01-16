@@ -21,8 +21,7 @@ public class AddressParserController {
 
     @PostMapping("/parse-address")
     public ResponseEntity<String> parseAddress(@RequestBody String address) {
-        String addrDetails = addressApiService.getAddressDetails(address);  //  First, get address details from API
-        String upp = addressParserService.parseToUPP(addrDetails);  //  Parse response into UPP format
+        String upp = addressParserService.parseAddressToUpp(address);
         return ResponseEntity.ok(upp);
     }
 }

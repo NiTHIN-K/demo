@@ -52,6 +52,16 @@
 			<artifactId>nv-i18n</artifactId>
 			<version>1.29</version>
 		</dependency>
+		<dependency>
+			<groupId>com.smartystreets.api</groupId>
+			<artifactId>smartystreets-java-sdk</artifactId>
+			<version>LATEST</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-csv</artifactId>
+			<version>LATEST</version>
+		</dependency>
 
 	</dependencies>
 
